@@ -1,0 +1,45 @@
+.linkCard {
+    padding: 8px 16px;
+    border-radius: 8px;
+    box-shadow: 0px 2px 8px #00000020;
+    color: #3e3e3e;
+
+    &Title {
+        font-size: 18px;
+    }
+
+    &Description {
+        font-size: 14px;
+    }
+}
+
+.cardCategory {
+    border: 2px solid lightgray;
+    border-radius: 8px;
+    width: 256px;
+    min-width: 256px;
+    padding: 16px 0px;
+    height: fit-content;
+
+    &Title {
+        color: gray;
+        // line-height: 0;
+        font-size: 16px;
+        margin: 0 16px;
+    }
+
+    &Children {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        height: 100%;
+        padding: 16px 16px 16px;
+    }
+}
+
+.cardCategoryWrapper {
+    display: flex;
+    height: 100vh;
+    padding: 16px;
+    gap: 8px;
+}
