@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import styles from "./styles.module.css";
+import styles from "./page.module.css";
 
 export default function Sec02() {
 	const cards = [

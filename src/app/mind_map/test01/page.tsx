@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import styles from "./test01.module.css";
+import styles from "./styles.module.css";
 
 interface TreeNode {
 	id: number;
@@ -36,6 +36,7 @@ export default function Test01() {
 
 	const renderNode = (node: TreeNode) => (
 		<div key={node.id} className={styles.parent}>
+			{/* biome-ignore lint/a11y/useKeyWithClickEvents: <explanation> */}
 			<div className={styles.box} onClick={() => handleClick(node)}>
 				testText {node.id}
 			</div>

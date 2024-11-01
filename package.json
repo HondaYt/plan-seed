@@ -9,19 +9,21 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "next": "15.0.1",
-    "react": "19.0.0-rc-69d4b800-20241021",
-    "react-dom": "19.0.0-rc-69d4b800-20241021",
-    "ress": "^5.0.2"
+    "@xyflow/react": "^12.3.3",
+    "next": "15.0.2",
+    "openai": "^4.69.0",
+    "react": "19.0.0-rc-02c0e824-20241028",
+    "react-dom": "19.0.0-rc-02c0e824-20241028"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
+    "@types/d3-force": "^3.0.10",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
-    "postcss": "^8",
-    "sass": "^1.80.4",
-    "tailwindcss": "^3.4.1",
+    "d3-force": "^3.0.0",
+    "ress": "^5.0.2",
+    "sass": "^1.80.5",
     "typescript": "^5"
   }
 }

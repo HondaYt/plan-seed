@@ -14,7 +14,7 @@ export default function Sec01() {
 			<button type="button" onClick={increment}>
 				+
 			</button>
-			<Link href="./html/sec01/index.html">
+			<Link href="/html/sec01/index.html">
 				<p>HTML</p>
 			</Link>
 		</>

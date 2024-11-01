@@ -1,0 +1,21 @@
+.box {
+    width: fit-content;
+    height: fit-content;
+    padding: 8px 16px;
+    background: #fff;
+    border-radius: 4px;
+    border: 2px solid lightgray;
+
+}
+
+.parent {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    gap: 32px;
+}
+
+.children {
+    display: flex;
+    gap: 16px;
+}
