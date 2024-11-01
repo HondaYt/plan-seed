@@ -8,14 +8,20 @@ export const resources: Resource[] = [
 			{
 				href: "sec01",
 				title: "section01",
-				description: "react Introduction",
+				description: "useStateについて",
 				date: "2024/10/21",
 			},
 			{
 				href: "sec02",
 				title: "section02",
-				description: "react Introduction",
+				description: "Componentについて",
 				date: "2024/10/25",
+			},
+			{
+				href: "sec03",
+				title: "section03",
+				description: "あああ",
+				date: "2124/10/25",
 			},
 		],
 	},
