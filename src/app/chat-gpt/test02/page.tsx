@@ -42,7 +42,11 @@ export default function Test01() {
 
 	return (
 		<main className={styles.main}>
-			<ConvertibleInput />
+			<ConvertibleInput
+				textValue={inputValue}
+				setTextValue={setInputValue}
+				onButtonClick={handleButtonClick}
+			/>
 			{/* <div className={styles.ConvertibleInputContainer}>
 				{!isCompleted ? (
 					<>
