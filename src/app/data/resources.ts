@@ -23,6 +23,12 @@ export const resources: Resource[] = [
 				description: "あああ",
 				date: "2124/10/25",
 			},
+			{
+				href: "sec04",
+				title: "section04",
+				description: "あああ",
+				date: "2124/10/25",
+			},
 		],
 	},
 	{
