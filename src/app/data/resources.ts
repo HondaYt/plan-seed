@@ -87,14 +87,26 @@ export const resources: Resource[] = [
 	// },
 
 	{
-		title: "📦 デモ",
-		href: "demo",
+		title: "📦 機能",
+		href: "futures",
 		links: [
 			{
-				href: "demo01",
-				title: "demo01",
-				description: "初回テスト日用のデモ",
+				href: "future01",
+				title: "future01",
+				description: "マインドマップの自動生成機能",
 				date: "2024/10/31",
+			},
+			{
+				href: "future02",
+				title: "future02",
+				description: "タイマー機能の実装",
+				date: "2024/12/06",
+			},
+			{
+				href: "future03",
+				title: "future03",
+				description: "共同編集Note",
+				date: "2024/12/06",
 			},
 		],
 	},

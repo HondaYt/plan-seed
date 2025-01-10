@@ -5,7 +5,8 @@ const openai = new OpenAI({
 	apiKey: process.env.OPENAI_API_KEY,
 });
 
-const MODEL = "gpt-3.5-turbo";
+// const MODEL = "gpt-3.5-turbo";
+const MODEL = "gpt-4o";
 const DEFAULT_ERROR_MESSAGE = "An error occurred.";
 const DEFAULT_EMPTY_RESPONSE = "No response received.";
 
