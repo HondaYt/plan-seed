@@ -3,9 +3,12 @@
 import { LinkBtn } from "@/app/components/Btn/LinkBtn";
 import styles from "./page.module.css";
 import { useState, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 
 function ConceptOtherContent() {
 	const [state, setState] = useState("");
+	const searchParams = useSearchParams();
+
 	return (
 		<main className={styles.main}>
 			<input
@@ -19,7 +22,7 @@ function ConceptOtherContent() {
 			<LinkBtn
 				disable={state === ""}
 				href={{
-					pathname: "/target",
+					pathname: "/planning/target",
 					query: { concept: `${state}` },
 				}}
 			>
