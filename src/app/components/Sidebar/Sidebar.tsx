@@ -10,9 +10,10 @@ interface LikedWord {
 interface SidebarProps {
 	likedWords: LikedWord[];
 	onUnlike: (id: string) => void;
+	inputText: string;
 }
 
-export function Sidebar({ likedWords, onUnlike }: SidebarProps) {
+export function Sidebar({ likedWords, inputText, onUnlike }: SidebarProps) {
 	return (
 		<div className={styles.sidebar}>
 			<div>
@@ -37,7 +38,7 @@ export function Sidebar({ likedWords, onUnlike }: SidebarProps) {
 				href={{
 					pathname: "/concept",
 					query: {
-						words: likedWords.map((w) => w.word).join(","),
+						words: `${inputText},${likedWords.map((w) => w.word).join(",")}`,
 					},
 				}}
 			>

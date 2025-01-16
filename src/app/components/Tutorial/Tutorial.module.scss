@@ -80,7 +80,7 @@
     &.active {
         font-size: 1.1rem;
         font-weight: 600;
-        color: #007AFF;
+        color: var(--primary-color-accessible);
         opacity: 1;
     }
 }
@@ -125,11 +125,12 @@
 .buttonSecondary {
     @extend %buttonBase;
     background: white;
-    color: #007AFF;
-    border: 2px solid #007AFF;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
 
     &:hover:not(:disabled) {
-        background: rgba(0, 122, 255, 0.1);
+
+        background: #eee;
     }
 
     &:disabled {
@@ -142,11 +143,11 @@
 /* プライマリーボタン */
 .buttonPrimary {
     @extend %buttonBase;
-    background: #007AFF;
+    background: var(--primary-color);
     color: white;
 
     &:hover {
-        background: #0056b3;
+        background: var(--primary-color-accessible);
     }
 }
 

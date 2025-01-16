@@ -4,7 +4,9 @@
     padding: 8px 16px;
     background: #fff;
     border-radius: 4px;
-    border: 2px solid lightgray;
+    border: 2px solid var(--primary-color);
+    box-shadow: 0px 2px 4px #00000030;
+
 
 }
 

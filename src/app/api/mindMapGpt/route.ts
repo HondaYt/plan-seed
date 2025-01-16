@@ -10,10 +10,12 @@ const MODEL = "gpt-4o";
 const DEFAULT_ERROR_MESSAGE = "An error occurred.";
 const DEFAULT_EMPTY_RESPONSE = "No response received.";
 
-const SYSTEM_MESSAGE = `You are an assistant that performs word associations.
-Please return only one word that is associated with the user's input word.
-However, avoid words that have already been used.
-Please respond with a single word in the specified language.
+const SYSTEM_MESSAGE = `You are an assistant that performs word associations based on specific genres.
+When given a word and a genre, return a single word that is:
+1. Associated with the input word
+2. Relevant to the specified genre
+3. Appropriate for brainstorming and ideation
+Please return only one word in Japanese.
 No explanation needed.`;
 
 interface ChatResponse {
@@ -23,7 +25,7 @@ interface ChatResponse {
 
 export async function POST(request: Request) {
 	try {
-		const { message, usedWords } = await request.json();
+		const { message, usedWords, genre } = await request.json();
 
 		if (!message) {
 			return NextResponse.json(
@@ -37,7 +39,7 @@ export async function POST(request: Request) {
 				{ role: "system", content: SYSTEM_MESSAGE },
 				{
 					role: "user",
-					content: `Please provide one word associated with "${message}" in Japanese language.
+					content: `Please provide one word associated with "${message}" in the genre of "${genre}" in Japanese language.
 					Avoid using these previously used words:
 					${usedWords.join(", ")}`,
 				},

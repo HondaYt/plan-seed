@@ -4,6 +4,7 @@ import { ConvertibleInput } from "@/app/components/ConvertibleInput/ConvertibleI
 import styles from "./page.module.css";
 import { Tutorial } from "@/app/components/Tutorial/Tutorial";
 import { Sidebar } from "@/app/components/Sidebar/Sidebar";
+import { useSearchParams } from "next/navigation";
 
 interface TreeNode {
 	id: number;
@@ -26,6 +27,7 @@ export default function Future01() {
 	const [likedWords, setLikedWords] = useState<LikedWord[]>([]);
 	const [isLoading, setIsLoading] = useState(false);
 	const [showTutorial, setShowTutorial] = useState(true);
+	const searchParams = useSearchParams();
 
 	useEffect(() => {
 		const tutorialPreference = localStorage.getItem("hideTutorial");
@@ -55,6 +57,7 @@ export default function Future01() {
 			setIsLoading(true);
 			const currentWords = getAllWords(tree);
 			if (textValue) currentWords.push(textValue);
+			const genre = searchParams.get("genre") || "other";
 
 			const response = await fetch("/api/mindMapGpt", {
 				method: "POST",
@@ -65,6 +68,7 @@ export default function Future01() {
 					message: word,
 					usedWords: Array.from(usedWords),
 					language: selectedLanguage,
+					genre: genre,
 				}),
 			});
 
@@ -218,6 +222,7 @@ export default function Future01() {
 					{renderNode(tree, true)}
 				</main>
 				<Sidebar
+					inputText={textValue}
 					likedWords={likedWords}
 					onUnlike={(id) => handleToggleLike({ id: Number(id), children: [] })}
 				/>
