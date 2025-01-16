@@ -3,7 +3,7 @@
 import styles from "./page.module.css";
 import { LinkBtn } from "@/app/components/Btn/LinkBtn";
 import { useContext } from "react";
-import { StateContext } from "../layout";
+import { StateContext } from "../contexts/StateContext";
 
 const getGenderLabel = (gender: string): string => {
 	switch (gender) {
