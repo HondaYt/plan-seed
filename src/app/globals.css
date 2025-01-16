@@ -1,3 +1,7 @@
+:root {
+    --primary-color: #77C93C;
+}
+
 *,
 ::after,
 ::before {

@@ -1,0 +1,19 @@
+"use client";
+
+import { LinkBtn } from "@/app/components/Btn/LinkBtn";
+import styles from "./page.module.css";
+import { useSearchParams } from "next/navigation";
+
+export default function Page() {
+	const searchParams = useSearchParams();
+	const genre = searchParams.get("genre");
+
+	return (
+		<main className={styles.main}>
+			<div>
+				ジャンルは<span>{genre}</span>です。
+			</div>
+			<LinkBtn href={"/genre"}>終了して次へ</LinkBtn>
+		</main>
+	);
+}

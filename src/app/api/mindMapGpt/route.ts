@@ -23,7 +23,7 @@ interface ChatResponse {
 
 export async function POST(request: Request) {
 	try {
-		const { message, usedWords, language } = await request.json();
+		const { message, usedWords } = await request.json();
 
 		if (!message) {
 			return NextResponse.json(
@@ -37,7 +37,7 @@ export async function POST(request: Request) {
 				{ role: "system", content: SYSTEM_MESSAGE },
 				{
 					role: "user",
-					content: `Please provide one word associated with "${message}" in ${language} language.
+					content: `Please provide one word associated with "${message}" in Japanese language.
 					Avoid using these previously used words:
 					${usedWords.join(", ")}`,
 				},

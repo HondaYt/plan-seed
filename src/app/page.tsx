@@ -1,10 +1,13 @@
-import { ResourcesGrid } from "@/app/components/ResourcesGrid/ResourcesGrid";
-import { resources } from "@/app/data/resources";
+import Image from "next/image";
+import styles from "./page.module.css";
+import Link from "next/link";
+import { LinkBtn } from "@/app/components/Btn/LinkBtn";
 
-export default function Home() {
+export default function Page() {
 	return (
-		<main>
-			<ResourcesGrid resources={resources} />
+		<main className={styles.main}>
+			<Image src={"/logo.svg"} height={100} width={500} alt="Plan Seed" />
+			<LinkBtn href={"/genre"}>はじめる</LinkBtn>
 		</main>
 	);
 }

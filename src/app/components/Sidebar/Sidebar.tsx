@@ -1,3 +1,4 @@
+import { LinkBtn } from "../Btn/LinkBtn";
 import styles from "./Sidebar.module.css";
 
 interface LikedWord {
@@ -14,21 +15,34 @@ interface SidebarProps {
 export function Sidebar({ likedWords, onUnlike }: SidebarProps) {
 	return (
 		<div className={styles.sidebar}>
-			<h2>いいねした単語</h2>
-			<ul className={styles.wordList}>
-				{likedWords.map((word) => (
-					<li key={word.id} className={styles.wordItem}>
-						<span>{word.word}</span>
-						<button
-							type="button"
-							onClick={() => onUnlike(word.id)}
-							className={styles.unlikeButton}
-						>
-							×
-						</button>
-					</li>
-				))}
-			</ul>
+			<div>
+				<h2>いいねした単語</h2>
+				<ul className={styles.wordList}>
+					{likedWords.map((word) => (
+						<li key={word.id} className={styles.wordItem}>
+							<span>{word.word}</span>
+							<button
+								type="button"
+								onClick={() => onUnlike(word.id)}
+								className={styles.unlikeButton}
+							>
+								×
+							</button>
+						</li>
+					))}
+				</ul>
+			</div>
+			<LinkBtn
+				disable={likedWords.length === 0}
+				href={{
+					pathname: "/concept",
+					query: {
+						words: likedWords.map((w) => w.word).join(","),
+					},
+				}}
+			>
+				次へ進む
+			</LinkBtn>
 		</div>
 	);
 }

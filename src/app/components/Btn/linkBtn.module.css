@@ -1,0 +1,33 @@
+.linkBtn {
+    display: grid;
+    place-items: center;
+    padding: 1rem 1rem;
+    width: 100%;
+    max-width: 16rem;
+    border-radius: 1rem;
+    font-weight: bold;
+}
+
+.primary {
+    background: var(--primary-color);
+    color: #fff;
+}
+
+.secondary {
+    border: 2px solid var(--primary-color);
+    background: #fff;
+    color: var(--primary-color);
+}
+
+.disabled {
+    pointer-events: none;
+
+    &.primary {
+        background: #ddd;
+    }
+
+    &.secondary {
+        border: 2px solid #ddd;
+        color: #ddd;
+    }
+}
