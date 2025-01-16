@@ -1,7 +1,8 @@
 "use client";
 import styles from "./layout.module.css";
-import { useState, useEffect, type ReactNode, createContext } from "react";
+import { useState, useEffect, type ReactNode } from "react";
 import { useSearchParams, usePathname } from "next/navigation";
+import { StateContext, SidebarContext } from "./contexts/StateContext";
 
 type State = {
 	genre: string;
@@ -20,32 +21,6 @@ type State = {
 	features: string[];
 	mainFeature: string;
 };
-
-export const StateContext = createContext<State>({
-	genre: "",
-	keywords: [],
-	concept: "",
-	target: {
-		ageMin: "",
-		ageMax: "",
-		gender: "",
-		occupation: "",
-	},
-	scene: {
-		when: "",
-		where: "",
-	},
-	features: [],
-	mainFeature: "",
-});
-
-export const SidebarContext = createContext<{
-	isVisible: boolean;
-	setIsVisible: (value: boolean) => void;
-}>({
-	isVisible: true,
-	setIsVisible: () => {},
-});
 
 const getGenderLabel = (gender: string): string => {
 	switch (gender) {
