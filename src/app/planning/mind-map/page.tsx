@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { ConvertibleInput } from "@/app/components/ConvertibleInput/ConvertibleInput";
 import styles from "./page.module.css";
 import { Tutorial } from "@/app/components/Tutorial/Tutorial";
-import { Sidebar } from "@/app/components/Sidebar/Sidebar";
+import { Sidebar } from "@/app/components/MMSidebar/Sidebar";
 import { useSearchParams } from "next/navigation";
 
 interface TreeNode {

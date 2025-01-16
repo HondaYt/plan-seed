@@ -20,7 +20,7 @@ export default function Page() {
 				<LinkBtn
 					disable={state === ""}
 					href={{
-						pathname: "/mind-map",
+						pathname: "/planning/mind-map",
 						query: { genre: `${state}` },
 					}}
 				>

@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import "ress";
 import "./globals.css";
+import "ress";
 export const metadata: Metadata = {
 	title: {
-		default: "React",
-		template: "%s | React",
+		default: "PlanSeed",
+		template: "%s | PlanSeed",
 	},
 };
 

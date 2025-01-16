@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { ConvertibleInput } from "@/app/components/ConvertibleInput/ConvertibleInput";
 import styles from "./page.module.css";
 import { Tutorial } from "@/app/components/Tutorial/Tutorial";
-import { Sidebar } from "../../components/Sidebar/Sidebar";
+import { Sidebar } from "../../components/MMSidebar/Sidebar";
 
 interface TreeNode {
 	id: number;

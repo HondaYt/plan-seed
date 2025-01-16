@@ -36,7 +36,7 @@ export function Sidebar({ likedWords, inputText, onUnlike }: SidebarProps) {
 			<LinkBtn
 				disable={likedWords.length === 0}
 				href={{
-					pathname: "/concept",
+					pathname: "concept",
 					query: {
 						words: `${inputText},${likedWords.map((w) => w.word).join(",")}`,
 					},

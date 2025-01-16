@@ -4,7 +4,7 @@
     padding: 1rem 1rem;
     width: 100%;
     max-width: 16rem;
-    border-radius: 1rem;
+    border-radius: 8px;
     font-weight: bold;
 }
 
@@ -23,8 +23,8 @@
     color: var(--primary-color);
 
     &:hover {
-        border: 2px solid var(--primary-color-accessible);
-        color: var(--primary-color-accessible);
+
+        background: #eee;
     }
 }
 

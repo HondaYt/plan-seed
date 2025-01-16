@@ -4,6 +4,7 @@ import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import styles from "./page.module.css";
 import { useState } from "react";
+import { LinkBtn } from "@/app/components/Btn/LinkBtn";
 
 interface ConceptResponse {
 	concepts?: string[];
@@ -77,7 +78,7 @@ export default function Page() {
 			</div>
 			{concepts.length > 0 && (
 				<div className={styles.conceptsContainer}>
-					<h2>生成された企画コンセプト：</h2>
+					<h2>企画コンセプト：</h2>
 					<div className={styles.conceptsContent}>
 						{concepts.map((concept) => (
 							<Link
@@ -85,12 +86,15 @@ export default function Page() {
 								className={`${styles.conceptItem} ${
 									selectedConcept === concept ? styles.selected : ""
 								}`}
-								href={`/detail?concept=${encodeURIComponent(concept)}`}
+								href={`target?concept=${concept}`}
 								onClick={() => setSelectedConcept(concept)}
 							>
 								{concept}
 							</Link>
 						))}
+						<LinkBtn secondary href={"concept/other"}>
+							自分で考える
+						</LinkBtn>
 					</div>
 				</div>
 			)}

@@ -11,7 +11,7 @@ function GenreBtn(props: GenreBtnProps) {
 		<Link
 			className={styles.genreBtn}
 			href={{
-				pathname: "/mind-map",
+				pathname: "mind-map",
 				query: { genre: `${props.genre}` },
 			}}
 		>
@@ -29,7 +29,7 @@ export default function Page() {
 					<GenreBtn genre="勉強" />
 					<GenreBtn genre="社会問題" />
 				</div>
-				<LinkBtn secondary href={"/genre/other"}>
+				<LinkBtn secondary href={"genre/other"}>
 					自分で考える
 				</LinkBtn>
 			</main>

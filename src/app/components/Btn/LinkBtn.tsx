@@ -4,7 +4,12 @@ import type { ReactNode } from "react";
 
 type LinkBtnProps = {
 	children: ReactNode;
-	href: any;
+	href:
+		| string
+		| {
+				pathname: string;
+				query?: { [key: string]: string };
+		  };
 	secondary?: boolean;
 	disable?: boolean;
 };

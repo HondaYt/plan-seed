@@ -3,7 +3,7 @@ import "../globals.css";
 import "ress";
 export const metadata: Metadata = {
 	title: {
-		default: "React",
+		default: "PlanSeed",
 		template: "%s | React",
 	},
 };
