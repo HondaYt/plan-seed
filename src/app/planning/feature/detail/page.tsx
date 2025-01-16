@@ -28,7 +28,7 @@ export default function Page() {
 				params.append(key, value);
 			}
 		});
-		setTargetUrl(`/result?${params.toString()}`);
+		setTargetUrl(`/planning/result?${params.toString()}`);
 	}, [mainFeature, features, searchParams]);
 
 	return (
