@@ -3,7 +3,7 @@
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import styles from "./page.module.css";
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import { LinkBtn } from "@/app/components/Btn/LinkBtn";
 
 interface ConceptResponse {
@@ -11,7 +11,7 @@ interface ConceptResponse {
 	error?: string;
 }
 
-export default function Page() {
+function ConceptContent() {
 	const searchParams = useSearchParams();
 	const wordsParam = searchParams.get("words");
 	const words = wordsParam ? decodeURIComponent(wordsParam).split(",") : [];
@@ -99,5 +99,13 @@ export default function Page() {
 				</div>
 			)}
 		</main>
+	);
+}
+
+export default function Page() {
+	return (
+		<Suspense fallback={<div>Loading...</div>}>
+			<ConceptContent />
+		</Suspense>
 	);
 }

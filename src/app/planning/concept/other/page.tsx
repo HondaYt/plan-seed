@@ -2,31 +2,37 @@
 
 import { LinkBtn } from "@/app/components/Btn/LinkBtn";
 import styles from "./page.module.css";
-import { useState } from "react";
+import { useState, Suspense } from "react";
 
-export default function Page() {
+function ConceptOtherContent() {
 	const [state, setState] = useState("");
 	return (
-		<>
-			<main className={styles.main}>
-				<input
-					className={styles.input}
-					type="text"
-					value={state}
-					onChange={(e) => {
-						setState(e.target.value);
-					}}
-				/>
-				<LinkBtn
-					disable={state === ""}
-					href={{
-						pathname: "/target",
-						query: { concept: `${state}` },
-					}}
-				>
-					次へ進む
-				</LinkBtn>
-			</main>
-		</>
+		<main className={styles.main}>
+			<input
+				className={styles.input}
+				type="text"
+				value={state}
+				onChange={(e) => {
+					setState(e.target.value);
+				}}
+			/>
+			<LinkBtn
+				disable={state === ""}
+				href={{
+					pathname: "/target",
+					query: { concept: `${state}` },
+				}}
+			>
+				次へ進む
+			</LinkBtn>
+		</main>
+	);
+}
+
+export default function Page() {
+	return (
+		<Suspense fallback={<div>Loading...</div>}>
+			<ConceptOtherContent />
+		</Suspense>
 	);
 }

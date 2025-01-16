@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import styles from "./page.module.css";
 import { LinkBtn } from "@/app/components/Btn/LinkBtn";
 import { useSearchParams } from "next/navigation";
@@ -16,7 +16,7 @@ type State = {
 	list: Feature[];
 };
 
-export default function Page() {
+function FeatureContent() {
 	const searchParams = useSearchParams();
 	const [state, setState] = useState<State>({
 		input: "",
@@ -78,50 +78,54 @@ export default function Page() {
 	const hasSelectedFeatures = state.list.some((item) => item.isSelected);
 
 	return (
-		<main className={styles.main}>
-			<div className={styles.container}>
-				<h1>機能・要素の設定</h1>
-				<div className={styles.inputGroup}>
-					<input
-						type="text"
-						className={styles.input}
-						value={state.input}
-						onChange={(e) => {
-							setState({
-								...state,
-								input: e.target.value,
-							});
-						}}
-						onKeyDown={handleKeyDown}
-						placeholder="新しい機能を入力してください"
-					/>
+		<div className={styles.container}>
+			<h1>機能・要素の設定</h1>
+			<div className={styles.inputGroup}>
+				<input
+					type="text"
+					className={styles.input}
+					value={state.input}
+					onChange={(e) => {
+						setState({
+							...state,
+							input: e.target.value,
+						});
+					}}
+					onKeyDown={handleKeyDown}
+					placeholder="新しい機能を入力してください"
+				/>
+				<button type="button" className={styles.addButton} onClick={handleAdd}>
+					追加
+				</button>
+			</div>
+			<div className={styles.featureList}>
+				{state.list.map((item) => (
 					<button
+						key={item.id}
 						type="button"
-						className={styles.addButton}
-						onClick={handleAdd}
+						className={`${styles.featureItem} ${
+							item.isSelected ? styles.selected : ""
+						}`}
+						onClick={() => handleToggleSelect(item.id)}
+						aria-pressed={item.isSelected}
 					>
-						追加
+						{item.text}
 					</button>
-				</div>
-				<div className={styles.featureList}>
-					{state.list.map((item) => (
-						<button
-							key={item.id}
-							type="button"
-							className={`${styles.featureItem} ${
-								item.isSelected ? styles.selected : ""
-							}`}
-							onClick={() => handleToggleSelect(item.id)}
-							aria-pressed={item.isSelected}
-						>
-							{item.text}
-						</button>
-					))}
-				</div>
+				))}
 			</div>
 			<LinkBtn disable={!hasSelectedFeatures} href={targetUrl}>
 				次へ
 			</LinkBtn>
+		</div>
+	);
+}
+
+export default function Page() {
+	return (
+		<main className={styles.main}>
+			<Suspense fallback={<div>Loading...</div>}>
+				<FeatureContent />
+			</Suspense>
 		</main>
 	);
 }
