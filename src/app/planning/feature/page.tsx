@@ -75,7 +75,6 @@ function FeatureContent() {
 						});
 					}}
 					onKeyDown={handleKeyDown}
-					placeholder="新しい機能を入力してください"
 				/>
 				<button type="button" className={styles.addButton} onClick={handleAdd}>
 					追加
