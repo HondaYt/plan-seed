@@ -17,7 +17,6 @@ type State = {
 };
 
 function FeatureContent() {
-	const searchParams = useSearchParams();
 	const [state, setState] = useState<State>({
 		input: "",
 		list: [],
@@ -61,22 +60,6 @@ function FeatureContent() {
 		});
 	};
 
-	useEffect(() => {
-		const selectedFeatures = state.list
-			.filter((item) => item.isSelected)
-			.map((item) => item.text);
-
-		if (selectedFeatures.length > 0) {
-			const params = new URLSearchParams(searchParams.toString());
-			params.append("features", encodeURIComponent(selectedFeatures.join(",")));
-			setTargetUrl(`feature/detail?${params.toString()}`);
-		} else {
-			setTargetUrl("feature/detail");
-		}
-	}, [state.list, searchParams]);
-
-	const hasSelectedFeatures = state.list.some((item) => item.isSelected);
-
 	return (
 		<div className={styles.container}>
 			<h1>機能・要素の設定</h1>
@@ -113,10 +96,47 @@ function FeatureContent() {
 					</button>
 				))}
 			</div>
-			<LinkBtn disable={!hasSelectedFeatures} href={targetUrl}>
-				次へ
-			</LinkBtn>
+			<Suspense fallback={<div>Loading...</div>}>
+				<FeatureUrlHandler
+					list={state.list}
+					targetUrl={targetUrl}
+					setTargetUrl={setTargetUrl}
+				/>
+			</Suspense>
 		</div>
+	);
+}
+
+function FeatureUrlHandler({
+	list,
+	targetUrl,
+	setTargetUrl,
+}: {
+	list: Feature[];
+	targetUrl: string;
+	setTargetUrl: (url: string) => void;
+}) {
+	const searchParams = useSearchParams();
+	const hasSelectedFeatures = list.some((item) => item.isSelected);
+
+	useEffect(() => {
+		const selectedFeatures = list
+			.filter((item) => item.isSelected)
+			.map((item) => item.text);
+
+		if (selectedFeatures.length > 0) {
+			const params = new URLSearchParams(searchParams.toString());
+			params.append("features", encodeURIComponent(selectedFeatures.join(",")));
+			setTargetUrl(`feature/detail?${params.toString()}`);
+		} else {
+			setTargetUrl("feature/detail");
+		}
+	}, [list, searchParams, setTargetUrl]);
+
+	return (
+		<LinkBtn disable={!hasSelectedFeatures} href={targetUrl}>
+			次へ
+		</LinkBtn>
 	);
 }
 

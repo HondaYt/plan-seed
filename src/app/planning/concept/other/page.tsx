@@ -5,8 +5,30 @@ import styles from "./page.module.css";
 import { useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 
+export default function Page() {
+	return (
+		<Suspense fallback={<div>Loading...</div>}>
+			<ConceptOtherContent />
+		</Suspense>
+	);
+}
+
 function ConceptOtherContent() {
 	const [state, setState] = useState("");
+	return (
+		<Suspense fallback={<div>Loading...</div>}>
+			<ConceptOtherContentInner state={state} setState={setState} />
+		</Suspense>
+	);
+}
+
+function ConceptOtherContentInner({
+	state,
+	setState,
+}: {
+	state: string;
+	setState: (value: string) => void;
+}) {
 	const searchParams = useSearchParams();
 
 	return (
@@ -29,13 +51,5 @@ function ConceptOtherContent() {
 				次へ進む
 			</LinkBtn>
 		</main>
-	);
-}
-
-export default function Page() {
-	return (
-		<Suspense fallback={<div>Loading...</div>}>
-			<ConceptOtherContent />
-		</Suspense>
 	);
 }

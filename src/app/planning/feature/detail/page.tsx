@@ -6,13 +6,35 @@ import styles from "./page.module.css";
 import { LinkBtn } from "@/app/components/Btn/LinkBtn";
 
 function DetailContent() {
+	const [mainFeature, setMainFeature] = useState<string>("");
+	const [targetUrl, setTargetUrl] = useState("/result");
+
+	return (
+		<DetailContentInner
+			mainFeature={mainFeature}
+			setMainFeature={setMainFeature}
+			targetUrl={targetUrl}
+			setTargetUrl={setTargetUrl}
+		/>
+	);
+}
+
+function DetailContentInner({
+	mainFeature,
+	setMainFeature,
+	targetUrl,
+	setTargetUrl,
+}: {
+	mainFeature: string;
+	setMainFeature: (value: string) => void;
+	targetUrl: string;
+	setTargetUrl: (value: string) => void;
+}) {
 	const searchParams = useSearchParams();
 	const featuresParam = searchParams.get("features");
 	const features = featuresParam
 		? decodeURIComponent(featuresParam).split(",")
 		: [];
-	const [mainFeature, setMainFeature] = useState<string>("");
-	const [targetUrl, setTargetUrl] = useState("/result");
 
 	useEffect(() => {
 		const params = new URLSearchParams();
@@ -29,7 +51,7 @@ function DetailContent() {
 			}
 		});
 		setTargetUrl(`/planning/result?${params.toString()}`);
-	}, [mainFeature, features, searchParams]);
+	}, [mainFeature, features, searchParams, setTargetUrl]);
 
 	return (
 		<div className={styles.container}>

@@ -1,5 +1,6 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
+import type { Dispatch, SetStateAction } from "react";
 import { ConvertibleInput } from "@/app/components/ConvertibleInput/ConvertibleInput";
 import styles from "./page.module.css";
 import { Tutorial } from "@/app/components/Tutorial/Tutorial";
@@ -18,7 +19,7 @@ interface LikedWord {
 	timestamp: number;
 }
 
-export default function Future01() {
+function MindMapContent() {
 	const [textValue, setTextValue] = useState("");
 	const [tree, setTree] = useState<TreeNode>({ id: 0, children: [] });
 	const [nextId, setNextId] = useState(1);
@@ -27,6 +28,66 @@ export default function Future01() {
 	const [likedWords, setLikedWords] = useState<LikedWord[]>([]);
 	const [isLoading, setIsLoading] = useState(false);
 	const [showTutorial, setShowTutorial] = useState(true);
+
+	return (
+		<Suspense fallback={<div>Loading...</div>}>
+			<MindMapContentInner
+				textValue={textValue}
+				setTextValue={setTextValue}
+				tree={tree}
+				setTree={setTree}
+				nextId={nextId}
+				setNextId={setNextId}
+				usedWords={usedWords}
+				setUsedWords={setUsedWords}
+				selectedLanguage={selectedLanguage}
+				setSelectedLanguage={setSelectedLanguage}
+				likedWords={likedWords}
+				setLikedWords={setLikedWords}
+				isLoading={isLoading}
+				setIsLoading={setIsLoading}
+				showTutorial={showTutorial}
+				setShowTutorial={setShowTutorial}
+			/>
+		</Suspense>
+	);
+}
+
+function MindMapContentInner({
+	textValue,
+	setTextValue,
+	tree,
+	setTree,
+	nextId,
+	setNextId,
+	usedWords,
+	setUsedWords,
+	selectedLanguage,
+	setSelectedLanguage,
+	likedWords,
+	setLikedWords,
+	isLoading,
+	setIsLoading,
+	showTutorial,
+	setShowTutorial,
+}: {
+	textValue: string;
+	setTextValue: (value: string) => void;
+	tree: TreeNode;
+	setTree: Dispatch<SetStateAction<TreeNode>>;
+	nextId: number;
+	setNextId: Dispatch<SetStateAction<number>>;
+	usedWords: Set<string>;
+	setUsedWords: Dispatch<SetStateAction<Set<string>>>;
+	selectedLanguage: string;
+	setSelectedLanguage: (value: string) => void;
+	likedWords: LikedWord[];
+	setLikedWords: Dispatch<SetStateAction<LikedWord[]>>;
+	isLoading: boolean;
+	setIsLoading: (value: boolean) => void;
+	showTutorial: boolean;
+	setShowTutorial: (value: boolean) => void;
+}) {
 	const searchParams = useSearchParams();
 
 	useEffect(() => {
@@ -34,7 +95,7 @@ export default function Future01() {
 		if (tutorialPreference === "true") {
 			setShowTutorial(false);
 		}
-	}, []);
+	}, [setShowTutorial]);
 
 	const handleTutorialPreference = (hideForever: boolean) => {
 		if (hideForever) {
@@ -130,10 +191,8 @@ export default function Future01() {
 		const isLiked = likedWords.some((liked) => liked.id === nodeId);
 
 		if (isLiked) {
-			// いいね済みの場合は削除
 			setLikedWords((prev) => prev.filter((word) => word.id !== nodeId));
 		} else {
-			// いいねされていない場合は追加
 			const newLikedWord: LikedWord = {
 				id: nodeId,
 				word: node.text || `testText ${node.id}`,
@@ -187,25 +246,21 @@ export default function Future01() {
 		{
 			target: "input",
 			content: "まずは、ワードを入力しましょう。",
-			// position: "bottom" as const,
 			image: "/tutorial/step1.jpg",
 		},
 		{
 			target: "box",
 			content: "ボックスをクリックすると関連するワードが生成されます",
-			// position: "right" as const,
 			image: "/tutorial/step2.jpg",
 		},
 		{
 			target: "like",
 			content: "気に入ったワードにいいねをつけましょう",
-			// position: "top" as const,
 			image: "/tutorial/step3.jpg",
 		},
 		{
 			target: "result",
 			content: "企画のゴールが出力されます",
-			// position: "top" as const,
 			image: "/tutorial/step4.jpg",
 		},
 	];
@@ -229,4 +284,8 @@ export default function Future01() {
 			</div>
 		</Tutorial>
 	);
+}
+
+export default function Page() {
+	return <MindMapContent />;
 }
