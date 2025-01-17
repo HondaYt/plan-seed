@@ -9,34 +9,38 @@ export async function POST(request: Request) {
 	try {
 		const { words } = await request.json();
 
-		const prompt = `
-You are tasked with generating 3 innovative project concepts in Japanese based on the following keywords.
-Each concept should be expressed in a single, concise sentence that captures the core idea.
+		const prompt = `与えられたキーワードを基に、3つの革新的なプロジェクトコンセプトを日本語で生成してください。
+各コンセプトは、核となるアイデアを1つの簡潔な文章で表現してください。
 
-Requirements:
-- Generate exactly 3 concepts
-- Each concept should be creative and unique
-- Maintain a professional tone
-- Output in Japanese
-- Return as a JSON array format
-- Do not include any numbering or prefixes
-- The concepts do not necessarily need to include the exact keywords, but should be inspired by or related to them
+要件:
+- 正確に3つのコンセプトを生成
+- 各コンセプトは創造的でユニークであること
+- プロフェッショナルなトーンを維持
+- 日本語で出力
+- 番号や接頭辞は含めない
+- キーワードを厳密に含める必要はないが、それらに触発された関連するアイデアであること
 
-Keywords: ${words.join(", ")}
+キーワード: ${words.join(", ")}
 
-Return your response in this exact format:
+以下の形式で厳密に返答してください:
 [
-  "concept1",
-  "concept2",
-  "concept3"
-]
-`;
+  "コンセプト1の内容",
+  "コンセプト2の内容",
+  "コンセプト3の内容"
+]`;
 
 		const completion = await openai.chat.completions.create({
-			messages: [{ role: "user", content: prompt }],
-			// model: "gpt-3.5-turbo",
-			model: "gpt-4o",
+			messages: [
+				{
+					role: "system",
+					content:
+						"あなたは正確なJSON形式でのみ応答するアシスタントです。余分な説明や装飾は一切付けずに、配列形式で3つのコンセプトを返してください。",
+				},
+				{ role: "user", content: prompt },
+			],
+			model: "gpt-4-turbo",
 			temperature: 0.8,
+			response_format: { type: "json_object" },
 		});
 
 		// nullチェックを追加
@@ -46,8 +50,12 @@ Return your response in this exact format:
 		}
 
 		try {
-			// JSON文字列をパースして配列に変換
-			const concepts = JSON.parse(content);
+			// レスポンスからコンセプトの配列を取得
+			const parsedContent = JSON.parse(content);
+			const concepts = Array.isArray(parsedContent)
+				? parsedContent
+				: parsedContent.concepts;
+
 			if (!Array.isArray(concepts) || concepts.length !== 3) {
 				throw new Error("不正な形式の応答です");
 			}
