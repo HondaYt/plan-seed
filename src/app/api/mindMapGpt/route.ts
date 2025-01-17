@@ -6,8 +6,8 @@ const openai = new OpenAI({
 });
 
 // const MODEL = "gpt-3.5-turbo";
-// const MODEL = "gpt-4o";
-const MODEL = "gpt-4o-mini";
+const MODEL = "gpt-4o";
+// const MODEL = "gpt-4o-mini";
 const DEFAULT_ERROR_MESSAGE = "An error occurred.";
 const DEFAULT_EMPTY_RESPONSE = "No response received.";
 
