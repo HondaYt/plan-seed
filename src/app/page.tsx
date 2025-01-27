@@ -30,7 +30,11 @@ export default function Page() {
 							/>
 						</div>
 						<h2>アイデア整理</h2>
-						<p>マインドマップで自由に発想を広げ、アイデアを整理できます</p>
+						<p>
+							マインドマップで自由に発想を
+							<br />
+							広げ、アイデアを整理できます
+						</p>
 					</div>
 					<div className={styles.featureItem}>
 						<div className={styles.iconWrapper}>
@@ -42,7 +46,11 @@ export default function Page() {
 							/>
 						</div>
 						<h2>ターゲット設定</h2>
-						<p>ユーザー像を具体的に設定し、ニーズを明確にします</p>
+						<p>
+							ユーザー像を具体的に設定し、
+							<br />
+							ニーズを明確にします
+						</p>
 					</div>
 					<div className={styles.featureItem}>
 						<div className={styles.iconWrapper}>
@@ -60,7 +68,7 @@ export default function Page() {
 
 				<div className={styles.startSection}>
 					<p className={styles.startText}>
-						さあ、あなたの企画づくりを始めましょう
+						さあ、あなたの企画づくりを始めましょう！
 					</p>
 					<LinkBtn href={"/planning/genre"}>はじめる</LinkBtn>
 				</div>

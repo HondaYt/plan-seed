@@ -9,6 +9,10 @@
     gap: 3rem;
 }
 
+.main h2{
+    font-size: 30px;
+}
+
 .genres {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
