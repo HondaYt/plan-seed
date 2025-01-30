@@ -61,6 +61,7 @@ function ResultContent() {
 						<p>性別: {getGenderLabel(state.target.gender)}</p>
 					)}
 					{state.target.occupation && <p>職業: {state.target.occupation}</p>}
+					{state.target.personality && <p>性格: {state.target.personality}</p>}
 				</div>
 			</section>
 

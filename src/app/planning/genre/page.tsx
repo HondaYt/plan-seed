@@ -24,7 +24,7 @@ export default function Page() {
 	return (
 		<>
 			<main className={styles.main}>
-				<h2>ジャンルを選択してください</h2>
+				<h2>企画のジャンルを選択してください</h2>
 				<div className={styles.genres}>
 					<GenreBtn genre="遊び" />
 					<GenreBtn genre="勉強" />

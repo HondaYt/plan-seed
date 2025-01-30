@@ -21,6 +21,7 @@ function TargetContent() {
 	});
 	const [gender, setGender] = useState("");
 	const [occupation, setOccupation] = useState("");
+	const [personality, setPersonality] = useState("");
 	const [isFormValid, setIsFormValid] = useState(false);
 	const [targetUrl, setTargetUrl] = useState("scene");
 
@@ -31,6 +32,7 @@ function TargetContent() {
 			Number(ageRange.min) <= Number(ageRange.max) &&
 			gender !== "" &&
 			occupation.trim() !== "";
+		personality.trim() !== "";
 
 		setIsFormValid(isValid);
 
@@ -41,9 +43,10 @@ function TargetContent() {
 			params.append("ageMax", ageRange.max);
 			params.append("gender", gender);
 			params.append("occupation", encodeURIComponent(occupation));
+			params.append("personality", encodeURIComponent(personality));
 			setTargetUrl(`scene?${params.toString()}`);
 		}
-	}, [ageRange, gender, occupation, conceptParam]);
+	}, [ageRange, gender, occupation, conceptParam, personality]);
 
 	return (
 		<div className={styles.targetForm}>
@@ -134,6 +137,18 @@ function TargetContent() {
 						onChange={(e) => setOccupation(e.target.value)}
 						required
 						placeholder="職業を入力してください"
+					/>
+				</div>
+
+				<div className={styles.formGroup}>
+					<label htmlFor="personality">性格</label>
+					<input
+						id="personality"
+						type="text"
+						// value={personality}
+						onChange={(e) => setPersonality(e.target.value)}
+						required
+						placeholder="性格を入力してください"
 					/>
 				</div>
 

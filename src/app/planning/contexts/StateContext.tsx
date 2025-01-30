@@ -9,6 +9,7 @@ type State = {
 		ageMax: string;
 		gender: string;
 		occupation: string;
+		personality: string;
 	};
 	scene: {
 		when: string;
@@ -27,6 +28,7 @@ export const StateContext = createContext<State>({
 		ageMax: "",
 		gender: "",
 		occupation: "",
+		personality: "",
 	},
 	scene: {
 		when: "",

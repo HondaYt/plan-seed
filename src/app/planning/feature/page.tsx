@@ -61,47 +61,64 @@ function FeatureContent() {
 	};
 
 	return (
-		<div className={styles.container}>
-			<h1>機能・要素の設定</h1>
-			<div className={styles.inputGroup}>
-				<input
-					type="text"
-					className={styles.input}
-					value={state.input}
-					onChange={(e) => {
-						setState({
-							...state,
-							input: e.target.value,
-						});
-					}}
-					onKeyDown={handleKeyDown}
-				/>
-				<button type="button" className={styles.addButton} onClick={handleAdd}>
-					追加
-				</button>
+		<div className={styles.main}>
+			<div className={styles.titleContainer}>
+				<h2 className={styles.pageTitle}>
+					次はブレーンストーミングです!
+					<br />
+					企画に必要な機能や要素をたくさん出していきましょう！
+				</h2>
 			</div>
-			<div className={styles.featureList}>
-				{state.list.map((item) => (
+			<div className={styles.container}>
+				<h2>機能・要素の設定</h2>
+				<div className={styles.inputGroup}>
+					<input
+						type="text"
+						className={styles.input}
+						value={state.input}
+						onChange={(e) => {
+							setState({
+								...state,
+								input: e.target.value,
+							});
+						}}
+						onKeyDown={handleKeyDown}
+					/>
 					<button
-						key={item.id}
 						type="button"
-						className={`${styles.featureItem} ${
-							item.isSelected ? styles.selected : ""
-						}`}
-						onClick={() => handleToggleSelect(item.id)}
-						aria-pressed={item.isSelected}
+						className={styles.addButton}
+						onClick={handleAdd}
 					>
-						{item.text}
+						追加
 					</button>
-				))}
+				</div>
+
+				<div className={styles.subText}>
+					<h3>お気に入りのアイデアを選択しましょう！（複数可）</h3>
+				</div>
+				<div className={styles.featureList}>
+					{state.list.map((item) => (
+						<button
+							key={item.id}
+							type="button"
+							className={`${styles.featureItem} ${
+								item.isSelected ? styles.selected : ""
+							}`}
+							onClick={() => handleToggleSelect(item.id)}
+							aria-pressed={item.isSelected}
+						>
+							{item.text}
+						</button>
+					))}
+				</div>
+				<Suspense fallback={<div>Loading...</div>}>
+					<FeatureUrlHandler
+						list={state.list}
+						targetUrl={targetUrl}
+						setTargetUrl={setTargetUrl}
+					/>
+				</Suspense>
 			</div>
-			<Suspense fallback={<div>Loading...</div>}>
-				<FeatureUrlHandler
-					list={state.list}
-					targetUrl={targetUrl}
-					setTargetUrl={setTargetUrl}
-				/>
-			</Suspense>
 		</div>
 	);
 }

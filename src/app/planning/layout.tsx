@@ -13,6 +13,7 @@ type State = {
 		ageMax: string;
 		gender: string;
 		occupation: string;
+		personality: string;
 	};
 	scene: {
 		when: string;
@@ -58,6 +59,7 @@ function LayoutContent({
 	const ageMax = searchParams.get("ageMax");
 	const gender = searchParams.get("gender");
 	const occupationParam = searchParams.get("occupation");
+	const personalityParam = searchParams.get("personality");
 	const when = searchParams.get("when");
 	const where = searchParams.get("where");
 	const featuresParam = searchParams.get("features");
@@ -97,6 +99,9 @@ function LayoutContent({
 					occupation: occupationParam
 						? decodeURIComponent(occupationParam)
 						: prevState.target.occupation,
+					personality: personalityParam
+						? decodeURIComponent(personalityParam)
+						: prevState.target.personality,
 				};
 
 				if (JSON.stringify(newTarget) !== JSON.stringify(prevState.target)) {
@@ -143,6 +148,7 @@ function LayoutContent({
 		ageMax,
 		gender,
 		occupationParam,
+		personalityParam,
 		when,
 		where,
 		featuresParam,
@@ -198,6 +204,9 @@ function LayoutContent({
 									)}
 									{state.target.occupation && (
 										<p>職業: {state.target.occupation}</p>
+									)}
+									{state.target.personality && (
+										<p>性格: {state.target.personality}</p>
 									)}
 								</div>
 							</div>
@@ -257,6 +266,7 @@ export default function RootLayout({
 			ageMax: "",
 			gender: "",
 			occupation: "",
+			personality: "",
 		},
 		scene: {
 			when: "",
