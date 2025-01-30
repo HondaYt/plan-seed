@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense } from "react";
+import { Suspense, useState } from "react";
 import styles from "./page.module.css";
 import { LinkBtn } from "@/app/components/Btn/LinkBtn";
 import { useContext } from "react";
@@ -21,10 +21,53 @@ const getGenderLabel = (gender: string): string => {
 
 function ResultContent() {
 	const state = useContext(StateContext);
+	const [copySuccess, setCopySuccess] = useState(false);
+
+	const handleCopy = async () => {
+		try {
+			const content = `
+# 企画概要
+
+## 基本情報
+${state.genre ? `**ジャンル:** ${state.genre}` : ""}
+${state.keywords.length > 0 ? `**キーワード:** ${state.keywords.join(", ")}` : ""}
+${state.concept ? `**企画コンセプト:**\n${state.concept}` : ""}
+
+## ターゲット
+${state.target.ageMin || state.target.ageMax ? `**年齢層:** ${state.target.ageMin}歳 〜 ${state.target.ageMax}歳` : ""}
+${state.target.gender ? `**性別:** ${getGenderLabel(state.target.gender)}` : ""}
+${state.target.occupation ? `**職業:** ${state.target.occupation}` : ""}
+${state.target.personality ? `**性格:** ${state.target.personality}` : ""}
+
+## 使用シーン
+${state.scene.when ? `**利用タイミング:**\n${state.scene.when}` : ""}
+${state.scene.where ? `**利用場所:**\n${state.scene.where}` : ""}
+
+## 機能
+${state.mainFeature ? `### メイン機能\n${state.mainFeature}` : ""}
+${
+	state.features.length > 0
+		? `### その他の機能\n${state.features
+				.filter((feature) => feature !== state.mainFeature)
+				.map((feature) => `- ${feature}`)
+				.join("\n")}`
+		: ""
+}
+`.trim();
+
+			await navigator.clipboard.writeText(content);
+			setCopySuccess(true);
+			setTimeout(() => setCopySuccess(false), 2000);
+		} catch (err) {
+			console.error("コピーに失敗しました:", err);
+		}
+	};
 
 	return (
 		<div className={styles.container}>
-			<h1>企画概要</h1>
+			<div className={styles.header}>
+				<h1>企画概要</h1>
+			</div>
 
 			<section className={styles.section}>
 				<h2>基本情報</h2>
@@ -96,6 +139,14 @@ function ResultContent() {
 			</section>
 
 			<div className={styles.buttonContainer}>
+				<button
+					type="button"
+					onClick={handleCopy}
+					className={styles.copyButton}
+					aria-label="内容をコピー"
+				>
+					{copySuccess ? "コピーしました！" : "コピー"}
+				</button>
 				<LinkBtn href={"/"}>はじめからする</LinkBtn>
 			</div>
 		</div>

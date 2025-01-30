@@ -82,4 +82,29 @@
     display: flex;
     justify-content: center;
     margin-top: 2rem;
+    gap: 16px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.copyButton {
+    display: grid;
+    place-items: center;
+    padding: 1rem 1rem;
+    width: 100%;
+    max-width: 16rem;
+    border-radius: 8px;
+    font-weight: bold;
+    border: 2px solid var(--primary-color);
+    background: #fff;
+    color: var(--primary-color);
+
+    &:hover {
+        background: #eee;
+    }
 }
